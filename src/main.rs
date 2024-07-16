@@ -1,11 +1,10 @@
-use axum::{Router, serve};
+use axum::{serve, Router};
 use clap::Parser;
-use tokio::net::TcpListener;
 use endpoints::endpoints::BaseRouter;
+use tokio::net::TcpListener;
 
-mod templates;
 mod endpoints;
-
+mod templates;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -24,8 +23,7 @@ async fn main() {
 
     let full_url = format!("{host}:{port}");
 
-    let app = Router::new()
-        .nest("/", BaseRouter::new_router());
+    let app = Router::new().nest("/", BaseRouter::new_router());
 
     println!("==========================");
     println!("Listening on: {full_url}");

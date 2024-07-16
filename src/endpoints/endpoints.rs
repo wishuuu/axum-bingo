@@ -1,10 +1,10 @@
+use crate::templates::IndexTemplate;
 use askama_axum::IntoResponse;
 use axum::body::Body;
 use axum::routing::get;
 use axum::Router;
 use http::StatusCode;
-use tower_http::services::{ServeDir};
-use crate::templates::IndexTemplate;
+use tower_http::services::ServeDir;
 
 pub struct BaseRouter;
 

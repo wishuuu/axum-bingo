@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "css": "npx tailwindcss-cli@latest build ../src/style.css -o ../dist/css/style.css"
+    "css": "npx tailwindcss -i style.css -o ../dist/css/style.css"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "tailwindcss": "^3.4.5"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39"
   }
 }
