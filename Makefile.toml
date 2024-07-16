@@ -1,0 +1,28 @@
+[tasks.dev]
+install_crate = "cargo-watch"
+command = "cargo"
+args = ["watch", "-c", "--ignore", "npm", "-x", "run"]
+
+[tasks.build]
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.docker]
+command = "docker"
+args = [
+    "compose",
+    "-f", "./deploy/docker-compose.yml",
+    "up",
+    "--build"
+]
+
+[tasks.build-docker]
+command="docker"
+args = ["build", ".", "-f", "./Dockerfile", "-t", "wishuuu/axum-bingo:latest"]
+
+[tasks.push-docker]
+command="docker"
+args = ["push", "wishuuu/axum-bingo:latest"]
+
+[tasks.cicd]
+dependencies = ["build-docker", "push-docker"]
