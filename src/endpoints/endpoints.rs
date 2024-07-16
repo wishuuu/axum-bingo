@@ -1,8 +1,10 @@
+use askama_axum::IntoResponse;
 use axum::body::Body;
 use axum::routing::get;
 use axum::Router;
 use http::StatusCode;
 use tower_http::services::{ServeDir};
+use crate::templates::IndexTemplate;
 
 pub struct BaseRouter;
 
@@ -14,6 +16,10 @@ impl BaseRouter {
                 "/ping",
                 get(|| async { (StatusCode::OK, Body::from("pong")) }),
             )
-            .route("/", get(|| async { (StatusCode::OK, Body::from("Hello, World!")) }))
+            .route("/", get(get_index))
     }
+}
+
+async fn get_index() -> impl IntoResponse {
+    IndexTemplate {}.into_response()
 }

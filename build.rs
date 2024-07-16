@@ -1,10 +1,7 @@
 use npm_rs::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=public/");
-
-    let npm_path = std::env::current_dir().unwrap();
+    let npm_path = std::env::current_dir().unwrap().join("npm");
 
     let npm_status = NpmEnv::default()
         .with_node_env(&NodeEnv::from_cargo_profile()?)
