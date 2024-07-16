@@ -1,0 +1,14 @@
+{
+  "name": "axum-bingo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "css": "npx tailwindcss-cli@latest build ./src/style.css -o ./dist/css/style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.5"
+  }
+}
