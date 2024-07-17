@@ -1,7 +1,67 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-3xl neon-purple">
-    Hello world!
-</div>
+<form
+        hx-get="/board"
+        hx-target="body"
+        hx-swap="outerHTML"
+>
+    <div class=" card bg-base-100 w-96 shadow-xl m-8">
+        <div class=" card-body">
+            <h2 class=" card-title">Dołącz do istniejącego pokoju</h2>
+            <div class=" card-actions justify-end">
+                <label class=" input input-bordered input-primary flex items-center gap-2">
+                    Nr pokoju
+                    <input type=" text" name="board"/>
+                </label>
+                <button
+                        class=" btn btn-primary"
+                        type="submit" value="Submit">Dołącz do pokoju
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form
+        hx-post="/board"
+        hx-target="body"
+        hx-swap="outerHTML"
+        hx-ext="json-enc"
+>
+    <div class="card bg-base-100 w-10/12 shadow-xl m-8">
+        <div class="card-body">
+            <h2 class=" card-title">Utwórz nowy pokój</h2>
+            <label>
+                <input class=" input input-bordered input-primary" type="number" name="size" value="{{size}}" min="3"
+                       max="6"
+                       hx-get="/"
+                       hx-target="body"
+                       hx-swap="outerHTML"
+                       hx-trigger="change"
+                />
+            </label>
+            <label>
+                <input class="input input-bordered input-primary" type="text" name="name" placeholder="Nazwa pokoju"/>
+            </label>
+            <div class=" card-actions justify-end">
+                <table>
+                    {% for i in 0..size %}
+                    <tr>
+                        {% for j in 0..size %}
+                        <th class="w-24">
+                            <input class=" input input-bordered input-primary" type="text" name="values"/>
+                        </th>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                <button
+                        class=" btn btn-primary"
+                        type="submit" value="Submit">Utwórz pokój
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
 {% endblock %}

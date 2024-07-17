@@ -1,10 +1,12 @@
 use crate::templates::IndexTemplate;
 use askama_axum::IntoResponse;
 use axum::body::Body;
+use axum::extract::Query;
 use axum::routing::get;
 use axum::Router;
 use http::StatusCode;
 use tower_http::services::ServeDir;
+use serde::Deserialize;
 
 pub struct BaseRouter;
 
@@ -20,6 +22,11 @@ impl BaseRouter {
     }
 }
 
-async fn get_index() -> impl IntoResponse {
-    IndexTemplate {}.into_response()
+#[derive(Deserialize)]
+struct IndexParams {
+    size: Option<usize>,
+}
+
+async fn get_index(params: Query<IndexParams>) -> impl IntoResponse {
+    IndexTemplate { size: params.size.unwrap_or(4) }.into_response()
 }

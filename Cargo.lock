@@ -221,6 +221,7 @@ dependencies = [
  "clap",
  "http",
  "npm_rs",
+ "serde",
  "tokio",
  "tower",
  "tower-http",
